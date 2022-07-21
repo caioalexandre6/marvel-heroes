@@ -1,0 +1,45 @@
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #262949;
+  color: white;
+  font-weight: 600;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+.search-input {
+  border-radius: 20px;
+  width: 30%;
+  outline: none;
+  float: right !important;
+  position: absolute;
+  right: 0;
+  font-family: 'Poppins', sans-serif;
+  margin-right: 6%;
+  height: 60%;
+  padding: 0 20px;
+  font-size: 16px;
+  background-color: #ccc;
+
+
+  &:placeholder {
+    color: #ffffff;
+    opacity: .6;
+  }
+}
+
+.icon-search{
+  float: right !important;
+  position: absolute;
+  right: 0;
+  margin-right: 4%;
+}
+

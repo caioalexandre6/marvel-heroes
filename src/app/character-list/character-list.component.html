@@ -1,0 +1,34 @@
+<app-toolbar
+  ngDefaultControl
+  [(ngModel)]="searchInput"
+  (ngModelChange)="pesquisar()"
+  (search)="pesquisar()"
+></app-toolbar>
+
+<div *ngIf="searchInput === undefined || searchInput === ''" class="header">
+  <img
+    alt="Marvel Banner"
+    class="img-banner"
+    src="../../assets/images/marvelBanner.svg"
+  />
+</div>
+
+<div class="content">
+  <div class="card-container">
+    <div *ngFor="let character of listCharacterAux; let i = index" class="card">
+      <img (click)="id(character.id)"
+        class="img-card"
+        src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension}}"
+        alt="{{character.name}}"
+      />
+      <div class="title">{{ character.name }}</div>
+      <div class="more-info">
+        <span class="material-symbols-rounded"> add_circle </span>
+      </div>
+    </div>
+
+    <div *ngIf="listCharacterAux.length === 0" class="card">
+      <img class="img-card" src="../../assets/images/notFound.png" />
+    </div>
+  </div>
+</div>
