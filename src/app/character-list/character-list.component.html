@@ -12,9 +12,23 @@
     src="../../assets/images/marvelBanner.svg"
   />
 </div>
+<div class="list-by" (click)="listBy()">
+  <h1 *ngIf="listByGrid === true">  <span class="material-symbols-rounded">
+    grid_view
+    </span>Grid</h1>
+    <h1 *ngIf="listByGrid === false">  <span class="material-symbols-rounded">
+      format_list_bulleted
+      </span>List</h1>
+</div>
+
+<!-- <div class="list-by">
+  <h1>  <span class="material-symbols-rounded">
+    format_list_bulleted
+    </span>List</h1>
+</div> -->
 
 <div class="content">
-  <div class="card-container">
+  <div *ngIf="listByGrid === false" class="card-container">
     <div *ngFor="let character of listCharacterAux; let i = index" class="card">
       <img (click)="id(character.id)"
         class="img-card"
@@ -26,9 +40,24 @@
         <span class="material-symbols-rounded"> add_circle </span>
       </div>
     </div>
+  </div>
 
     <div *ngIf="listCharacterAux.length === 0" class="card">
       <img class="img-card" src="../../assets/images/notFound.png" />
     </div>
+
+    <div class="list-container">
+    <table *ngIf="listByGrid === true">
+      <tr *ngFor="let character of listCharacterAux">
+        <td class="td-img"> <img
+          class="img-list"
+          src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension}}"
+          alt="{{character.name}}"
+        /></td>
+        <td>{{character.name}}</td>
+        <td *ngIf="character.description !== ''">{{character.description}}</td>
+        <td *ngIf="character.description === ''">Clique aqui em <a [href]="character.urls[1].url" target="_blank">"Saiba Mais"</a> para encontrar mais informações sobre o seu persogem!</td>
+      </tr>
+    </table>
   </div>
 </div>
