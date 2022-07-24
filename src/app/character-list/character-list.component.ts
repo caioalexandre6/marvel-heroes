@@ -1,5 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CharactersObj } from '../objetos/charactersObj';
+import { ResponseObj } from '../objetos/responseObj';
 import { ServiceMarvel } from '../services/serviceMarvel';
 
 @Component({
@@ -12,14 +14,18 @@ import { ServiceMarvel } from '../services/serviceMarvel';
 })
 export class CharacterListComponent implements OnInit {
   public searchInput: any;
+  public loading: boolean;
+  public loadBanner: boolean;
   public listByGrid: boolean;
-  public listCharacter: Array<any>;
-  public listCharacterAux: Array<any>;
+  public listCharacter: Array<CharactersObj>;
+  public listCharacterAux: Array<CharactersObj>;
 
   constructor(private api: ServiceMarvel, private router: Router) {
-    this.listCharacter = new Array<any>();
-    this.listCharacterAux = new Array<any>();
     this.listByGrid = false;
+    this.loading = false;
+    this.loadBanner = false;
+    this.listCharacter = new Array<CharactersObj>();
+    this.listCharacterAux = new Array<CharactersObj>();
   }
 
   pesquisar() {
@@ -35,14 +41,6 @@ export class CharacterListComponent implements OnInit {
     });
   }
 
-  async id(id: any) {
-    console.log('CLICOU AI');
-    await this.api.getCharacterById(id).then(async (resp: any) => {
-      this.listCharacter = resp.data.results;
-      this.listCharacterAux = this.listCharacter;
-    });
-  }
-
   listBy() {
     if (this.listByGrid === false) {
       this.listByGrid = true;
@@ -51,15 +49,24 @@ export class CharacterListComponent implements OnInit {
     }
   }
 
-  navigateByRoute(character: any){
-    this.router.navigate(['/character-details'], character);
+  navigateByRoute(character: CharactersObj) {
+    this.router.navigate(['/character-details'], {
+      state: { personage: character, characters: this.listCharacter },
+    });
   }
 
   async ngOnInit() {
-    await this.api.getCharacters().then(async (resp: any) => {
-      this.listCharacter = resp.data.results;
-      this.listCharacterAux = this.listCharacter;
-      console.log('list', this.listCharacter);
+    this.loading = true;
+    await this.api.getCharacters().then(async (resp: ResponseObj) => {
+      console.log('obj', resp);
+      if(resp.code === 200){
+        this.listCharacter = resp.data.results;
+        this.listCharacterAux = this.listCharacter;
+        this.loading = false;
+      } else{
+        this.loading = false;
+      }
     });
+    console.log('console', this.listCharacterAux)
   }
 }

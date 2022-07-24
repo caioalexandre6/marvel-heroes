@@ -1,1 +1,26 @@
-<p>character-details works!</p>
+<app-toolbar></app-toolbar>
+
+<div class="top-details">
+  <img
+    class="img-card"
+    src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"
+  />
+  <div class="character">
+    <h4>{{ character.name }}</h4>
+  </div>
+  <div class="character-desc">
+    <h4>{{ character.description }}</h4>
+  </div>
+</div>
+
+<app-title-bar [name]="titleComic"></app-title-bar>
+<div class="cards-list">
+  <div *ngFor="let comic of listComicAux" class="card">
+    <div class="card_image">
+      <img
+        src="{{comic.thumbnail.path}}.{{ comic.thumbnail.extension }}"
+      />
+    </div>
+  </div>
+
+</div>

@@ -1,24 +1,24 @@
 
 .list-by {
   display: flex;
-  margin: 72px auto 1px;
+  margin: 5% auto 12px;
   max-width: 40%;
   flex-direction: column;
   align-items: center;
   border-radius: 15px;
-  border: 2px solid #eee;
+  border: 2px solid #324eee;
   background-color: #fafafa;
-  color: #771515;
+  box-shadow: 0 10px 45px 0 rgba(black,.5);
+  color: #c71a1a;
   cursor: pointer;
   &:hover{
-    border: 2px solid #666666;
     background-color: #bbbaba;
   }
 }
 
 .content {
   display: flex;
-  margin: 42px auto 32px;
+  margin: 12px auto 32px;
   padding: 0 16px;
   max-width: 980px;
   flex-direction: column;
@@ -31,7 +31,6 @@
   padding: unset;
   width: 100% !important;
   height: 50%;
-  margin-top: 4%;
 }
 
 .img-banner{
@@ -49,8 +48,8 @@
 
 
 .card {
-  border-radius: 15px;
-  border: 2px solid #eee;
+  border-radius: 18px;
+  border: 2px solid #0724ce;
   background-color: #fafafa;
   height: 200px;
   width: 200px;
@@ -61,7 +60,7 @@
   align-items: center;
   transition: all 0.4s ease;
   line-height: 24px;
-  box-shadow: 0 10px 25px 0 rgba(black,.5);
+  box-shadow: 0 30px 15px 0 rgba(black,.5);
   transition: .5s;
   cursor: pointer;
 
@@ -76,12 +75,11 @@
 }
 }
 
-.list-container {
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 16px;
-  display: flex;
+.not-found{
+  margin-top: 10%;
 }
+
+
 
 .more-info {
   float: left;
@@ -110,6 +108,22 @@
   transition: .5s;
 }
 
+.list-container {
+  overflow-x: auto;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  display: flex;
+}
+
+.img-table{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
 .img-card{
   width: 100%;
   height: 100%;
@@ -119,6 +133,7 @@
 .img-list{
   width: 80%;
   height: 80%;
+  margin: 11px auto 1px;
   border-radius: 15px;
   border: 2px solid rgb(163, 163, 163);
 }
@@ -127,6 +142,12 @@ table {
   font-family: 'Poppins', sans-serif;
   border-collapse: unset;
   width: 90%;
+  margin: 11px auto 1px;
+}
+
+.table-name{
+  min-width: 140px;
+  text-align: center;
 }
 
 td, th {
@@ -137,6 +158,11 @@ td, th {
   align-items: center;
 }
 
+.table-details{
+  text-align: center;
+  min-width: 140px;
+  cursor: pointer;
+}
 
 tr:nth-child(even) {
   background-color: #262949;

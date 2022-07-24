@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,11 +8,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   @Output() search = new EventEmitter<boolean>();
-  constructor() {}
+  constructor(private router: Router) {}
 
   searchEvent() {
     this.search.emit(true);
-    console.log('disparou');
+  }
+
+  homePage(){
+    this.router.navigate(['/character-list']);
   }
   ngOnInit(): void {}
 }

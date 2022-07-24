@@ -1,0 +1,70 @@
+import { CharactersObj } from './charactersObj';
+import { CreatorsObj } from './creatorsObj';
+import { EventsObj } from './eventsObj';
+import { ImagensObj } from './imagensObj';
+import { itemsObj } from './itemsObj';
+import { StoriesObj } from './storiesObj';
+
+export class ComicsObj {
+  public id: number;
+  public digitalId: number;
+  public title: string;
+  public issueNumber: number;
+  public variantDescription: string;
+  public description: string;
+  public modified: number;
+  public isbn: string;
+  public upc: string;
+  public diamondCode: string;
+  public ean: string;
+  public issn: string;
+  public format: string;
+  public pageCount: number;
+  public textObjects: Array<any>;
+  public resourceURI: string;
+  public urls: Array<any>;
+  public series: string;
+  public items: Array<itemsObj>;
+  public variants: Array<any>;
+  public collections: Array<any>;
+  public collectedIssues: Array<any>;
+  public prices: Array<any>;
+  public thumbnail: ImagensObj;
+  public images: ImagensObj;
+  public creators: Array<CreatorsObj>;
+  public characters: Array<CharactersObj>;
+  public stories: Array<StoriesObj>;
+  public events: Array<EventsObj>;
+
+  constructor() {
+    this.id = 0;
+    this.digitalId = 0;
+    this.title = '';
+    this.issueNumber = 0;
+    this.variantDescription = '';
+    this.description = '';
+    this.modified = 0;
+    this.isbn = '';
+    this.upc = '';
+    this.diamondCode = '';
+    this.ean = '';
+    this.issn = '';
+    this.format = '';
+    this.pageCount = 0;
+    this.textObjects = new Array<any>();
+    this.resourceURI = '';
+    this.urls = new Array<any>();
+    this.series = '';
+    this.items = new Array<itemsObj>();
+    this.variants = new Array<any>();
+    this.collections = new Array<any>();
+    this.collectedIssues = new Array<any>();
+    this.prices = new Array<any>();
+    this.thumbnail = new ImagensObj();
+    this.images = new ImagensObj();
+    this.creators = new Array<CreatorsObj>();
+    this.characters = new Array<CharactersObj>();
+    this.stories = new Array<StoriesObj>();
+    this.events = new Array<EventsObj>();
+  }
+}

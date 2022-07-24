@@ -1,4 +1,3 @@
-
 export class DataObj {
   public base_url: string;
   public ts: string;
@@ -6,7 +5,7 @@ export class DataObj {
   public public_key: string;
   public hash: any;
 
-  constructor(){
+  constructor() {
     this.base_url = '';
     this.ts = '';
     this.private_key = '';

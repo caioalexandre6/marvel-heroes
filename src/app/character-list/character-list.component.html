@@ -10,30 +10,27 @@
     alt="Marvel Banner"
     class="img-banner"
     src="../../assets/images/marvelBanner.svg"
+    (load)="loadBanner = true"
   />
 </div>
-<div class="list-by" (click)="listBy()">
-  <h1 *ngIf="listByGrid === true">  <span class="material-symbols-rounded">
-    grid_view
-    </span>Grid</h1>
-    <h1 *ngIf="listByGrid === false">  <span class="material-symbols-rounded">
-      format_list_bulleted
-      </span>List</h1>
+
+<div *ngIf="listCharacterAux.length > 0" class="list-by" (click)="listBy()">
+  <h1 *ngIf="listByGrid === true">
+    <span class="material-symbols-rounded"> grid_view </span>Grid
+  </h1>
+  <h1 *ngIf="listByGrid === false">
+    <span class="material-symbols-rounded"> format_list_bulleted </span>List
+  </h1>
 </div>
 
-<!-- <div class="list-by">
-  <h1>  <span class="material-symbols-rounded">
-    format_list_bulleted
-    </span>List</h1>
-</div> -->
-
 <div class="content">
+  <app-loading *ngIf="loading === true"></app-loading>
   <div *ngIf="listByGrid === false" class="card-container">
-    <div *ngFor="let character of listCharacterAux; let i = index" class="card">
-      <img (click)="id(character.id)"
+    <div *ngFor="let character of listCharacterAux; let i = index" class="card"  (click)="navigateByRoute(character)">
+      <img
         class="img-card"
-        src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension}}"
-        alt="{{character.name}}"
+        src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"
+        alt="{{ character.name }}"
       />
       <div class="title">{{ character.name }}</div>
       <div class="more-info">
@@ -42,21 +39,32 @@
     </div>
   </div>
 
-    <div *ngIf="listCharacterAux.length === 0" class="card">
-      <img class="img-card" src="../../assets/images/notFound.png" />
-    </div>
+  <div *ngIf="listCharacterAux.length === 0 && loading === false" class="card not-found">
+    <img class="img-card" src="../../assets/images/notFound.png" />
+  </div>
 
-    <div class="list-container">
-    <table *ngIf="listByGrid === true">
-      <tr *ngFor="let character of listCharacterAux">
-        <td class="td-img"> <img
-          class="img-list"
-          src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension}}"
-          alt="{{character.name}}"
-        /></td>
-        <td>{{character.name}}</td>
-        <td *ngIf="character.description !== ''">{{character.description}}</td>
-        <td *ngIf="character.description === ''">Clique aqui em <a [href]="character.urls[1].url" target="_blank">"Saiba Mais"</a> para encontrar mais informações sobre o seu persogem!</td>
+  <div *ngIf="listByGrid === true" class="list-container">
+    <table class="table">
+      <tr *ngFor="let character of listCharacterAux"  class="table">
+        <td class="img-table">
+          <img
+            class="img-list"
+            src="{{ character.thumbnail.path }}.{{
+              character.thumbnail.extension
+            }}"
+            alt="{{ character.name }}"
+          />
+        </td>
+        <td class="table-name">{{ character.name }}</td>
+        <td *ngIf="character.description !== ''">
+          {{ character.description }}
+        </td>
+        <td *ngIf="character.description === ''">
+          Clique aqui em
+          <a [href]="character.urls[1].url" target="_blank">"Saiba Mais"</a>
+          para encontrar mais informações sobre o seu persogem!
+        </td>
+        <td (click)="navigateByRoute(character)" class="table-details">Detalhes</td>
       </tr>
     </table>
   </div>

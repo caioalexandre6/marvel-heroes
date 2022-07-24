@@ -1,0 +1,17 @@
+.title-bar {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #9e1414;
+  color: white;
+  font-weight: 600;
+}
+
+.title-name{
+  text-align: center;
+  flex: content;
+}

@@ -1,8 +1,9 @@
 import { CharacterDetailsComponent } from './../character-details/character-details.component';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { AppConfig } from '../config/app.config';
+import { ResponseObj } from '../objetos/responseObj';
 
 @Injectable()
 export class ServiceMarvel {
@@ -19,18 +20,20 @@ export class ServiceMarvel {
             `?ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
-        .subscribe(
-          (response: any) => {
+        .subscribe({
+          next: (response: any) => {
             resolve(response);
           },
-          (error) => {
-            reject(error);
-          }
-        );
+          error: (err: any) => {
+            reject(err);
+          },
+        });
     });
   }
 
-  getCharacterById(characterId: string): Promise<any> {
+/*   GET /v1/public/characters/{characterId}/comics */
+
+  getComicsById(characterId: number): Promise<any> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -39,18 +42,18 @@ export class ServiceMarvel {
         .get(
           this.config.data.base_url +
             '/' +
-            `${characterId}` +
+            `${characterId}` + '/comics' +
             `?ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
-        .subscribe(
-          (response: any) => {
+        .subscribe({
+          next: (response: any) => {
             resolve(response);
           },
-          (error) => {
-            reject(error);
-          }
-        );
+          error: (err: any) => {
+            reject(err);
+          },
+        });
     });
   }
 }
