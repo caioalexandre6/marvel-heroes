@@ -9,7 +9,7 @@ import { ResponseObj } from '../objetos/responseObj';
 export class ServiceMarvel {
   constructor(private http: HttpClient, private config: AppConfig) {}
 
-  getCharacters(): Promise<any> {
+  getCharacters(limit: number, offSet: number): Promise<any> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -17,7 +17,7 @@ export class ServiceMarvel {
       await this.http
         .get(
           this.config.data.base_url +
-            `?ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+          `?limit=`+`${limit}`+`&offset=`+`${offSet}`+`&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({
@@ -31,9 +31,29 @@ export class ServiceMarvel {
     });
   }
 
-/*   GET /v1/public/characters/{characterId}/comics */
+  getCharactersByName(name: string, limit: number, offSet: number): Promise<any> {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return new Promise(async (resolve, reject) => {
+      await this.http
+        .get(
+          this.config.data.base_url +
+          `?nameStartsWith=`+`${name}`+`&limit=`+`${limit}`+`&offset=`+`${offSet}`+`&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+          { headers }
+        )
+        .subscribe({
+          next: (response: any) => {
+            resolve(response);
+          },
+          error: (err: any) => {
+            reject(err);
+          },
+        });
+    });
+  }
 
-  getComicsById(characterId: number): Promise<any> {
+  getComicsByName(characterId: number, name: string, limit: number, offSet: number): Promise<any> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -43,7 +63,31 @@ export class ServiceMarvel {
           this.config.data.base_url +
             '/' +
             `${characterId}` + '/comics' +
-            `?ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+           `nameStartsWith=`+`${name}`+`&?limit=`+`${limit}`+`&offset=`+`${offSet}`+`&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+          { headers }
+        )
+        .subscribe({
+          next: (response: any) => {
+            resolve(response);
+          },
+          error: (err: any) => {
+            reject(err);
+          },
+        });
+    });
+  }
+
+  getComicsById(characterId: number, limit: number, offSet: number): Promise<any> {
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    return new Promise(async (resolve, reject) => {
+      await this.http
+        .get(
+          this.config.data.base_url +
+            '/' +
+            `${characterId}` + '/comics' +
+            `?limit=`+`${limit}`+`&offset=`+`${offSet}`+`&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({

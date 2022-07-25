@@ -1,11 +1,10 @@
 <app-toolbar
   ngDefaultControl
   [(ngModel)]="searchInput"
-  (ngModelChange)="pesquisar()"
-  (search)="pesquisar()"
+  (search)="getCharactersByName(searchInput)"
 ></app-toolbar>
 
-<div *ngIf="searchInput === undefined || searchInput === ''" class="header">
+<div class="header">
   <img
     alt="Marvel Banner"
     class="img-banner"
@@ -14,25 +13,21 @@
   />
 </div>
 
-<div *ngIf="listCharacterAux.length > 0" class="list-by" (click)="listBy()">
-  <h1 *ngIf="listByGrid === true">
-    <span class="material-symbols-rounded"> grid_view </span>Grid
-  </h1>
-  <h1 *ngIf="listByGrid === false">
-    <span class="material-symbols-rounded"> format_list_bulleted </span>List
-  </h1>
+<div id="focusSearch" *ngIf="listCharacterAux.length > 0" class="list-by" (click)="listBy()">
+    <span *ngIf="listByGrid === true" class="material-symbols-rounded"> grid_view </span>
+    <span *ngIf="listByGrid === false" class="material-symbols-rounded"> format_list_bulleted </span>
 </div>
 
 <div class="content">
   <app-loading *ngIf="loading === true"></app-loading>
-  <div *ngIf="listByGrid === false" class="card-container">
+  <div *ngIf="listByGrid === false"  class="card-container">
     <div *ngFor="let character of listCharacterAux; let i = index" class="card"  (click)="navigateByRoute(character)">
       <img
         class="img-card"
         src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"
         alt="{{ character.name }}"
       />
-      <div class="title">{{ character.name }}</div>
+      <div class="card_title title-white">{{ character.name }}</div>
       <div class="more-info">
         <span class="material-symbols-rounded"> add_circle </span>
       </div>
@@ -68,4 +63,10 @@
       </tr>
     </table>
   </div>
+  <div *ngIf="btnLoad === true" class="btn-load">
+    <button class="btn-load-more" type="button" (click)="loadMore()">LOAD MORE!</button>
+  </div>
 </div>
+
+
+

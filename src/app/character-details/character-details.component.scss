@@ -68,6 +68,26 @@
     flex-direction: column;
   }
 }
+.btn-load-more{
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  margin: 10px 10px;
+  width: 500px;
+  height: 60px;
+  border-radius: 5px;
+  background-color: #262949;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.4s;
+  &:hover{
+    background-color: #a1a1a1;
+  }
+}
+
+.btn-load{
+    text-align: center;
+    flex: content;
+}
 
 
 

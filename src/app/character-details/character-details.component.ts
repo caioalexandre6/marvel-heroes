@@ -16,6 +16,7 @@ import { ResponseComicObj } from '../objetos/responseComicObj';
 export class CharacterDetailsComponent implements OnInit {
   public character: CharactersObj;
   public loc: any;
+  public btnLoad: boolean;
   public titleComic: string;
   public AllCharacters: Array<CharactersObj>;
   public listComic: Array<ComicsObj>;
@@ -23,10 +24,32 @@ export class CharacterDetailsComponent implements OnInit {
 
   constructor(private api: ServiceMarvel ,private router: Router, private location: Location) {
     this.titleComic = "COMICS"
+    this.btnLoad = true;
     this.character = new CharactersObj();
     this.AllCharacters = new Array<CharactersObj>();
     this.listComic = new Array<ComicsObj>();
     this.listComicAux = new Array<ComicsObj>();
+  }
+
+  async loadMore(){
+    this.btnLoad = false;
+    await this.api.getComicsById(this.character.id, 4, this.listComicAux.length).then(async (resp: ResponseComicObj) => {
+      console.log('obj', resp);
+      if(resp.code === 200){
+        if(resp.data.results.length !== 0){
+          for (const newComics of resp.data.results) {
+            this.listComic.push(newComics);
+          }
+          this.listComicAux = this.listComic;
+          this.btnLoad = true;
+        } else{
+          this.btnLoad = false;
+        }
+       /*  this.loading = false; */
+      } else{
+      /*   this.loading = false; */
+      }
+    });
   }
 
   async ngOnInit(): Promise<void> {
@@ -34,7 +57,7 @@ export class CharacterDetailsComponent implements OnInit {
     this.AllCharacters = this.loc.characters;
     this.character = this.loc.personage;
 
-    await this.api.getComicsById(this.character.id).then(async (resp: ResponseComicObj) => {
+    await this.api.getComicsById(this.character.id, 4, 0).then(async (resp: ResponseComicObj) => {
       console.log('obj', resp);
       if(resp.code === 200){
         this.listComic = resp.data.results;
