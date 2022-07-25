@@ -9,7 +9,7 @@ import { ResponseObj } from '../objetos/responseObj';
 export class ServiceMarvel {
   constructor(private http: HttpClient, private config: AppConfig) {}
 
-  /* requisao get retornando personagens definidos por quantidades e limites */
+  /* Requisao get retornando personagens definidos por quantidades e limites */
   getCharacters(limit: number, offSet: number): Promise<any> {
     const headers = {
       'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export class ServiceMarvel {
     });
   }
 
-  /* requisao get retornando personagens definidos por nome, quantidades e limites */
+  /* Requisao get retornando personagens definidos por nome, quantidades e limites */
   getCharactersByName(
     name: string,
     limit: number,
@@ -69,7 +69,7 @@ export class ServiceMarvel {
     });
   }
 
-  /* requisao get retornando comics definidos por id, nome, quantidades e limites */
+  /* Requisao get retornando comics definidos por id, nome, quantidades e limites */
   getComicsByName(
     characterId: number,
     name: string,
@@ -106,7 +106,7 @@ export class ServiceMarvel {
     });
   }
 
-  /* requisao get retornando comics definidos por id, quantidades e limites */
+  /* Requisao get retornando comics definidos por id, quantidades e limites */
   getComicsById(
     characterId: number,
     limit: number,

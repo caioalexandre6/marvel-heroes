@@ -42,24 +42,24 @@ export class CharacterListComponent implements OnInit {
   }
 
   /*  Filtro para pesquisar personagens na Array */
-  pesquisar() {
+  /*  pesquisar() {
     this.listCharacterAux = this.filterItems(this.searchInput);
-  }
+  } */
 
   /*  Filtrar itens já carregado na Array */
-  filterItems(searchInput: any) {
+  /*   filterItems(searchInput: any) {
     return this.listCharacter.filter((obj) => {
       var conteudo = obj.name;
       return conteudo.toLowerCase().indexOf(searchInput.toLowerCase()) > -1;
     });
-  }
+  } */
 
   /*   Scroll para determinada div na tela */
   scrollToFocus(focusName: string): void {
     this.scroller.scrollToAnchor(focusName);
   }
 
-  /*  mudar de list para grid e vice versa */
+  /*  Mudar de list para grid e vice versa */
   listBy() {
     if (this.listByGrid === false) {
       this.listByGrid = true;
@@ -68,7 +68,7 @@ export class CharacterListComponent implements OnInit {
     }
   }
 
-  /* navegar por rota */
+  /* Navegar por rota */
   navigateByRoute(character: CharactersObj) {
     this.router.navigate(['/character-details'], {
       state: { personage: character, characters: this.listCharacter },
@@ -96,7 +96,7 @@ export class CharacterListComponent implements OnInit {
     }
   }
 
-  /*  carregar mais personagens e não carregar os que já existem em tela */
+  /*  Carregar mais personagens e não carregar os que já existem em tela */
   async loadMore() {
     this.btnLoad = false;
     await this.api

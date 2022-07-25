@@ -17,7 +17,7 @@ export class AppConfig {
     this.private_key = '4d77f68594544ee25dab2c8ef8e1ef613d1ab10b';
     this.public_key = 'f2afdf8469b21340ee6757ce38c1f134';
 
-    /* metodo para criar o Hash */
+    /* Metodo para criar o Hash */
     this.hash = md5
       .appendStr(this.ts)
       .appendStr(this.private_key)
