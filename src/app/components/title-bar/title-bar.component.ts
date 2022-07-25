@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./title-bar.component.scss']
 })
 export class TitleBarComponent implements OnInit {
+  /* input para receber o titulo da barra */
   @Input() name: string;
 
   constructor() {
