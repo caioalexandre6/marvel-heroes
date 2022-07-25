@@ -44,14 +44,12 @@ export class CharacterListComponent implements OnInit {
   /*  Filtro para pesquisar personagens na Array */
   pesquisar() {
     this.listCharacterAux = this.filterItems(this.searchInput);
-    console.log('disparou', this.listCharacterAux);
   }
 
   /*  Filtrar itens já carregado na Array */
   filterItems(searchInput: any) {
     return this.listCharacter.filter((obj) => {
       var conteudo = obj.name;
-      console.log('codd', conteudo);
       return conteudo.toLowerCase().indexOf(searchInput.toLowerCase()) > -1;
     });
   }
@@ -83,7 +81,6 @@ export class CharacterListComponent implements OnInit {
       await this.api
         .getCharactersByName(searchInput, 16, 0)
         .then(async (resp: ResponseObj) => {
-          console.log('obj', resp);
           if (resp.code === 200) {
             this.listCharacter = resp.data.results;
             this.listCharacterAux = this.listCharacter;
@@ -105,7 +102,6 @@ export class CharacterListComponent implements OnInit {
     await this.api
       .getCharacters(4, this.listCharacterAux.length)
       .then(async (resp: ResponseObj) => {
-        console.log('obj', resp);
         if (resp.code === 200) {
           if (resp.data.results.length !== 0) {
             for (const newCharacter of resp.data.results) {
@@ -126,7 +122,6 @@ export class CharacterListComponent implements OnInit {
   async ngOnInit() {
     this.loading = true;
     await this.api.getCharacters(4, 0).then(async (resp: ResponseObj) => {
-      console.log('obj', resp);
       if (resp.code === 200) {
         this.listCharacter = resp.data.results;
         this.listCharacterAux = this.listCharacter;
@@ -135,6 +130,5 @@ export class CharacterListComponent implements OnInit {
         this.loading = false;
       }
     });
-    console.log('console', this.listCharacterAux);
   }
 }

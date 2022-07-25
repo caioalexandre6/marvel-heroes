@@ -36,20 +36,18 @@ export class CharacterDetailsComponent implements OnInit {
     this.listComicAux = new Array<ComicsObj>();
   }
 
-    /*  Filtro para pesquisar personagens na Array */
-    pesquisar() {
-      this.listComicAux = this.filterItems(this.searchInput);
-      console.log('disparou', this.listComicAux);
-    }
+  /*  Filtro para pesquisar personagens na Array */
+  pesquisar() {
+    this.listComicAux = this.filterItems(this.searchInput);
+  }
 
-    /*  Filtrar itens já carregado na Array */
-    filterItems(searchInput: any) {
-      return this.listComic.filter((obj) => {
-        var conteudo = obj.title;
-        console.log('codd', conteudo);
-        return conteudo.toLowerCase().indexOf(searchInput.toLowerCase()) > -1;
-      });
-    }
+  /*  Filtrar itens já carregado na Array */
+  filterItems(searchInput: any) {
+    return this.listComic.filter((obj) => {
+      var conteudo = obj.title;
+      return conteudo.toLowerCase().indexOf(searchInput.toLowerCase()) > -1;
+    });
+  }
 
   /* Carregar mais comics por ID e por limite sem carregar os que já existem */
   async loadMore() {
@@ -57,7 +55,6 @@ export class CharacterDetailsComponent implements OnInit {
     await this.api
       .getComicsById(this.character.id, 4, this.listComicAux.length)
       .then(async (resp: ResponseComicObj) => {
-        console.log('obj', resp);
         if (resp.code === 200) {
           if (resp.data.results.length !== 0) {
             for (const newComics of resp.data.results) {
@@ -86,7 +83,6 @@ export class CharacterDetailsComponent implements OnInit {
       await this.api
         .getComicsById(this.character.id, 4, 0)
         .then(async (resp: ResponseComicObj) => {
-          console.log('obj', resp);
           if (resp.code === 200) {
             this.listComic = resp.data.results;
             this.listComicAux = this.listComic;
@@ -95,7 +91,6 @@ export class CharacterDetailsComponent implements OnInit {
             /*   this.loading = false; */
           }
         });
-      console.log('console', this.listComicAux);
     }
   }
 }

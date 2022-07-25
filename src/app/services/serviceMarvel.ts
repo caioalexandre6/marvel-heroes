@@ -9,6 +9,7 @@ import { ResponseObj } from '../objetos/responseObj';
 export class ServiceMarvel {
   constructor(private http: HttpClient, private config: AppConfig) {}
 
+  /* requisao get retornando personagens definidos por quantidades e limites */
   getCharacters(limit: number, offSet: number): Promise<any> {
     const headers = {
       'Content-Type': 'application/json',
@@ -17,7 +18,11 @@ export class ServiceMarvel {
       await this.http
         .get(
           this.config.data.base_url +
-          `?limit=`+`${limit}`+`&offset=`+`${offSet}`+`&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+            `?limit=` +
+            `${limit}` +
+            `&offset=` +
+            `${offSet}` +
+            `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({
@@ -31,7 +36,12 @@ export class ServiceMarvel {
     });
   }
 
-  getCharactersByName(name: string, limit: number, offSet: number): Promise<any> {
+  /* requisao get retornando personagens definidos por nome, quantidades e limites */
+  getCharactersByName(
+    name: string,
+    limit: number,
+    offSet: number
+  ): Promise<any> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -39,7 +49,13 @@ export class ServiceMarvel {
       await this.http
         .get(
           this.config.data.base_url +
-          `?nameStartsWith=`+`${name}`+`&limit=`+`${limit}`+`&offset=`+`${offSet}`+`&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+            `?nameStartsWith=` +
+            `${name}` +
+            `&limit=` +
+            `${limit}` +
+            `&offset=` +
+            `${offSet}` +
+            `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({
@@ -53,7 +69,13 @@ export class ServiceMarvel {
     });
   }
 
-  getComicsByName(characterId: number, name: string, limit: number, offSet: number): Promise<any> {
+  /* requisao get retornando comics definidos por id, nome, quantidades e limites */
+  getComicsByName(
+    characterId: number,
+    name: string,
+    limit: number,
+    offSet: number
+  ): Promise<any> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -62,8 +84,15 @@ export class ServiceMarvel {
         .get(
           this.config.data.base_url +
             '/' +
-            `${characterId}` + '/comics' +
-           `nameStartsWith=`+`${name}`+`&?limit=`+`${limit}`+`&offset=`+`${offSet}`+`&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+            `${characterId}` +
+            '/comics' +
+            `nameStartsWith=` +
+            `${name}` +
+            `&?limit=` +
+            `${limit}` +
+            `&offset=` +
+            `${offSet}` +
+            `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({
@@ -77,7 +106,12 @@ export class ServiceMarvel {
     });
   }
 
-  getComicsById(characterId: number, limit: number, offSet: number): Promise<any> {
+  /* requisao get retornando comics definidos por id, quantidades e limites */
+  getComicsById(
+    characterId: number,
+    limit: number,
+    offSet: number
+  ): Promise<any> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -86,8 +120,13 @@ export class ServiceMarvel {
         .get(
           this.config.data.base_url +
             '/' +
-            `${characterId}` + '/comics' +
-            `?limit=`+`${limit}`+`&offset=`+`${offSet}`+`&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+            `${characterId}` +
+            '/comics' +
+            `?limit=` +
+            `${limit}` +
+            `&offset=` +
+            `${offSet}` +
+            `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({
