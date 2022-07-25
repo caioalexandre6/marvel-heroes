@@ -1,7 +1,9 @@
-<app-toolbar  ngDefaultControl
-[(ngModel)]="searchInput"
-(search)="pesquisar()"
-(ngModelChange)="pesquisar()"></app-toolbar>
+<app-toolbar
+  ngDefaultControl
+  [(ngModel)]="searchInput"
+  (search)="pesquisar()"
+  (ngModelChange)="pesquisar()"
+></app-toolbar>
 
 <div class="top-details">
   <img
@@ -20,15 +22,14 @@
 <div class="cards-list">
   <div *ngFor="let comic of listComicAux" class="card">
     <div class="card_image">
-      <img
-        src="{{comic.thumbnail.path}}.{{ comic.thumbnail.extension }}"
-      />
+      <img src="{{ comic.thumbnail.path }}.{{ comic.thumbnail.extension }}" />
     </div>
-    <h4>{{comic.title}}</h4>
+    <a>{{ comic.title }}</a>
   </div>
-
 </div>
 
 <div *ngIf="btnLoad === true" class="btn-load">
-  <button class="btn-load-more" type="button" (click)="loadMore()">LOAD MORE!</button>
+  <button class="btn-load-more" type="button" (click)="loadMore()">
+    LOAD MORE!
+  </button>
 </div>
