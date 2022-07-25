@@ -86,11 +86,11 @@ export class CharacterListComponent implements OnInit {
             this.listCharacterAux = this.listCharacter;
             this.btnLoad = true;
             this.scrollToFocus('focusSearch');
+            this.btnLoad = true;
           } else {
             this.loading = false;
           }
         });
-      this.btnLoad = false;
     } else {
       this.scrollToFocus('focusSearch');
     }
