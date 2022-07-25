@@ -1,4 +1,7 @@
-<app-toolbar></app-toolbar>
+<app-toolbar  ngDefaultControl
+[(ngModel)]="searchInput"
+(search)="pesquisar()"
+(ngModelChange)="pesquisar()"></app-toolbar>
 
 <div class="top-details">
   <img
@@ -21,6 +24,7 @@
         src="{{comic.thumbnail.path}}.{{ comic.thumbnail.extension }}"
       />
     </div>
+    <h4>{{comic.title}}</h4>
   </div>
 
 </div>

@@ -13,15 +13,28 @@
   />
 </div>
 
-<div id="focusSearch" *ngIf="listCharacterAux.length > 0" class="list-by" (click)="listBy()">
-    <span *ngIf="listByGrid === true" class="material-symbols-rounded"> grid_view </span>
-    <span *ngIf="listByGrid === false" class="material-symbols-rounded"> format_list_bulleted </span>
+<div
+  id="focusSearch"
+  *ngIf="listCharacterAux.length > 0"
+  class="list-by"
+  (click)="listBy()"
+>
+  <span *ngIf="listByGrid === true" class="material-symbols-rounded">
+    grid_view
+  </span>
+  <span *ngIf="listByGrid === false" class="material-symbols-rounded">
+    format_list_bulleted
+  </span>
 </div>
 
 <div class="content">
   <app-loading *ngIf="loading === true"></app-loading>
-  <div *ngIf="listByGrid === false"  class="card-container">
-    <div *ngFor="let character of listCharacterAux; let i = index" class="card"  (click)="navigateByRoute(character)">
+  <div *ngIf="listByGrid === false" class="card-container">
+    <div
+      *ngFor="let character of listCharacterAux; let i = index"
+      class="card"
+      (click)="navigateByRoute(character)"
+    >
       <img
         class="img-card"
         src="{{ character.thumbnail.path }}.{{ character.thumbnail.extension }}"
@@ -34,13 +47,16 @@
     </div>
   </div>
 
-  <div *ngIf="listCharacterAux.length === 0 && loading === false" class="card not-found">
+  <div
+    *ngIf="listCharacterAux.length === 0 && loading === false"
+    class="card not-found"
+  >
     <img class="img-card" src="../../assets/images/notFound.png" />
   </div>
 
   <div *ngIf="listByGrid === true" class="list-container">
     <table class="table">
-      <tr *ngFor="let character of listCharacterAux"  class="table">
+      <tr *ngFor="let character of listCharacterAux" class="table">
         <td class="img-table">
           <img
             class="img-list"
@@ -59,14 +75,15 @@
           <a [href]="character.urls[1].url" target="_blank">"Saiba Mais"</a>
           para encontrar mais informações sobre o seu persogem!
         </td>
-        <td (click)="navigateByRoute(character)" class="table-details">Detalhes</td>
+        <td (click)="navigateByRoute(character)" class="table-details">
+          Detalhes
+        </td>
       </tr>
     </table>
   </div>
-  <div *ngIf="btnLoad === true" class="btn-load">
-    <button class="btn-load-more" type="button" (click)="loadMore()">LOAD MORE!</button>
+  <div *ngIf="btnLoad === true && loading === false" class="btn-load">
+    <button class="btn-load-more" type="button" (click)="loadMore()">
+      LOAD MORE!
+    </button>
   </div>
 </div>
-
-
-

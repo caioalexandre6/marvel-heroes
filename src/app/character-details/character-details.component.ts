@@ -17,13 +17,18 @@ export class CharacterDetailsComponent implements OnInit {
   public character: CharactersObj;
   public loc: any;
   public btnLoad: boolean;
+  public searchInput: any;
   public titleComic: string;
   public AllCharacters: Array<CharactersObj>;
   public listComic: Array<ComicsObj>;
   public listComicAux: Array<ComicsObj>;
 
-  constructor(private api: ServiceMarvel ,private router: Router, private location: Location) {
-    this.titleComic = "COMICS"
+  constructor(
+    private api: ServiceMarvel,
+    private router: Router,
+    private location: Location
+  ) {
+    this.titleComic = 'COMICS';
     this.btnLoad = true;
     this.character = new CharactersObj();
     this.AllCharacters = new Array<CharactersObj>();
@@ -31,42 +36,66 @@ export class CharacterDetailsComponent implements OnInit {
     this.listComicAux = new Array<ComicsObj>();
   }
 
-  async loadMore(){
+    /*  Filtro para pesquisar personagens na Array */
+    pesquisar() {
+      this.listComicAux = this.filterItems(this.searchInput);
+      console.log('disparou', this.listComicAux);
+    }
+
+    /*  Filtrar itens já carregado na Array */
+    filterItems(searchInput: any) {
+      return this.listComic.filter((obj) => {
+        var conteudo = obj.title;
+        console.log('codd', conteudo);
+        return conteudo.toLowerCase().indexOf(searchInput.toLowerCase()) > -1;
+      });
+    }
+
+  /* Carregar mais comics por ID e por limite sem carregar os que já existem */
+  async loadMore() {
     this.btnLoad = false;
-    await this.api.getComicsById(this.character.id, 4, this.listComicAux.length).then(async (resp: ResponseComicObj) => {
-      console.log('obj', resp);
-      if(resp.code === 200){
-        if(resp.data.results.length !== 0){
-          for (const newComics of resp.data.results) {
-            this.listComic.push(newComics);
+    await this.api
+      .getComicsById(this.character.id, 4, this.listComicAux.length)
+      .then(async (resp: ResponseComicObj) => {
+        console.log('obj', resp);
+        if (resp.code === 200) {
+          if (resp.data.results.length !== 0) {
+            for (const newComics of resp.data.results) {
+              this.listComic.push(newComics);
+            }
+            this.listComicAux = this.listComic;
+            this.btnLoad = true;
+          } else {
+            this.btnLoad = false;
           }
-          this.listComicAux = this.listComic;
-          this.btnLoad = true;
-        } else{
-          this.btnLoad = false;
+          /*  this.loading = false; */
+        } else {
+          /*   this.loading = false; */
         }
-       /*  this.loading = false; */
-      } else{
-      /*   this.loading = false; */
-      }
-    });
+      });
   }
 
+  /* Ao entrar na tela carregar 4 primeiros comics */
   async ngOnInit(): Promise<void> {
     this.loc = this.location.getState();
     this.AllCharacters = this.loc.characters;
     this.character = this.loc.personage;
-
-    await this.api.getComicsById(this.character.id, 4, 0).then(async (resp: ResponseComicObj) => {
-      console.log('obj', resp);
-      if(resp.code === 200){
-        this.listComic = resp.data.results;
-        this.listComicAux = this.listComic;
-       /*  this.loading = false; */
-      } else{
-      /*   this.loading = false; */
-      }
-    });
-    console.log('console', this.listComicAux)
+    if (this.character === undefined) {
+      this.router.navigate(['/character-list']);
+    } else {
+      await this.api
+        .getComicsById(this.character.id, 4, 0)
+        .then(async (resp: ResponseComicObj) => {
+          console.log('obj', resp);
+          if (resp.code === 200) {
+            this.listComic = resp.data.results;
+            this.listComicAux = this.listComic;
+            /*  this.loading = false; */
+          } else {
+            /*   this.loading = false; */
+          }
+        });
+      console.log('console', this.listComicAux);
+    }
   }
 }
