@@ -15,14 +15,14 @@ export class ServiceMarvel {
       'Content-Type': 'application/json',
     };
     return new Promise(async (resolve, reject) => {
-      await this.http
+      this.http
         .get(
           this.config.data.base_url +
-            `?limit=` +
-            `${limit}` +
-            `&offset=` +
-            `${offSet}` +
-            `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+          `?limit=` +
+          `${limit}` +
+          `&offset=` +
+          `${offSet}` +
+          `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({
@@ -46,16 +46,16 @@ export class ServiceMarvel {
       'Content-Type': 'application/json',
     };
     return new Promise(async (resolve, reject) => {
-      await this.http
+      this.http
         .get(
           this.config.data.base_url +
-            `?nameStartsWith=` +
-            `${name}` +
-            `&limit=` +
-            `${limit}` +
-            `&offset=` +
-            `${offSet}` +
-            `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+          `?nameStartsWith=` +
+          `${name}` +
+          `&limit=` +
+          `${limit}` +
+          `&offset=` +
+          `${offSet}` +
+          `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({
@@ -80,19 +80,19 @@ export class ServiceMarvel {
       'Content-Type': 'application/json',
     };
     return new Promise(async (resolve, reject) => {
-      await this.http
+      this.http
         .get(
           this.config.data.base_url +
-            '/' +
-            `${characterId}` +
-            '/comics' +
-            `nameStartsWith=` +
-            `${name}` +
-            `&?limit=` +
-            `${limit}` +
-            `&offset=` +
-            `${offSet}` +
-            `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+          '/' +
+          `${characterId}` +
+          '/comics' +
+          `nameStartsWith=` +
+          `${name}` +
+          `&?limit=` +
+          `${limit}` +
+          `&offset=` +
+          `${offSet}` +
+          `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({
@@ -116,17 +116,17 @@ export class ServiceMarvel {
       'Content-Type': 'application/json',
     };
     return new Promise(async (resolve, reject) => {
-      await this.http
+      this.http
         .get(
           this.config.data.base_url +
-            '/' +
-            `${characterId}` +
-            '/comics' +
-            `?limit=` +
-            `${limit}` +
-            `&offset=` +
-            `${offSet}` +
-            `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
+          '/' +
+          `${characterId}` +
+          '/comics' +
+          `?limit=` +
+          `${limit}` +
+          `&offset=` +
+          `${offSet}` +
+          `&ts=${this.config.data.ts}&apikey=${this.config.data.public_key}&hash=${this.config.data.hash}`,
           { headers }
         )
         .subscribe({
